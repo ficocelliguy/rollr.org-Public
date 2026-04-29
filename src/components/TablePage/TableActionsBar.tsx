@@ -13,6 +13,7 @@ import { useModal } from "@/components/TablePage/ModalProvider/ModalContext";
 import type { Player } from "@/types/player";
 import type { TableStatus } from "@/components/TablePage/types";
 import { DEFAULT_PROFILE_PIC } from "@/data/values";
+import {ProfilePic} from "@/components/shared/ProfilePic";
 
 export interface TableActionProps {
     isInEditMode: boolean;
@@ -64,12 +65,7 @@ export default function TableActionsBar(props: TableActionProps) {
                             onClick={() => canMovePlayersToTable ? onPromoteWaitlistPlayer?.(player.id) : undefined}
                             tabIndex={0}
                         >
-                            <Image
-                                alt={player.username + "'s profile pic"}
-                                height={64}
-                                src={player.miniPic || DEFAULT_PROFILE_PIC}
-                                width={64}
-                            />
+                            <ProfilePic username={player.username} profilePicUrl={player.imageUrl} />
                             <div>{player.username}</div>
                         </li>
                     ))}

@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Button from "@mui/material/Button";
 import {Card, CardContent, CardHeader, Typography} from "@mui/material";
 import Grid from "@mui/material/Grid";
+import {ProfilePic} from "@/components/shared/ProfilePic";
 import {renderTagsFromIds} from "@/components/shared/TagComponents";
 import type { Player } from "@/types/player";
 import type { Tag } from "@/types/tag";
-import { DEFAULT_PROFILE_PIC } from "@/data/values";
 
 export type PlayerHighlightsCardProps = {
     addToTable?: (player: Player) => void;
@@ -37,7 +36,7 @@ export const PlayerHighlightsCard = function(props: PlayerHighlightsCardProps) {
                 <Grid container spacing={2} direction="column">
                     <Grid container direction="row">
                         <Grid>
-                            <Image alt={player.username + "'s profile pic"} height={64} src={player.miniPic || DEFAULT_PROFILE_PIC} width={64} />
+                            <ProfilePic username={player.username} profilePicUrl={player.imageUrl} />
                         </Grid>
                         <Grid>
                             <Typography variant="h5">{player.username}</Typography>
@@ -71,16 +70,16 @@ export const DMHighlightsCard = function({canEdit, player, allTags}:{canEdit: bo
             <CardHeader slotProps={{title: { variant: "h4"}}} title="Game Master"/>
             <CardContent sx={{ backgroundColor: canEdit ? '#fffbea' : 'inherit' }}>
                 <Grid container spacing={2} direction="column">
-                    <Grid>
-                        <Typography variant="h5">{player.username}</Typography>
-                    </Grid>
                     <Grid container direction="row">
                         <Grid>
-                            <Image alt={player.username + "'s profile pic"} height={120} src={player.imageUrl || DEFAULT_PROFILE_PIC} width={256} />
+                            <ProfilePic username={player.username} profilePicUrl={player.imageUrl} />
                         </Grid>
-                        <Grid>{renderTagsFromIds(player.tags, allTags)}</Grid>
-                        <Typography>{player.description}</Typography>
+                        <Grid>
+                            <Typography variant="h5">{player.username}</Typography>
+                        </Grid>
                     </Grid>
+                    <Grid>{renderTagsFromIds(player.tags, allTags)}</Grid>
+                    <Typography>{player.description}</Typography>
                 </Grid>
             </CardContent>
         </Card>

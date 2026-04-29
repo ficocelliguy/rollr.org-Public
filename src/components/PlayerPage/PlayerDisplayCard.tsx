@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Card, CardMedia, CardContent, Typography } from "@mui/material";
-import {DEFAULT_PROFILE_PIC, ProfilePictureSettings} from "@/data/values";
+import { Card, CardContent, Typography } from "@mui/material";
+import {DEFAULT_PROFILE_PIC} from "@/data/values";
+import {ProfilePic} from "@/components/shared/ProfilePic";
 
 export type PlayerDisplayProps = {
     profilePicture: string | null;
@@ -55,17 +56,9 @@ const PlayerDisplayCard: React.FC<PlayerDisplayProps> = ({
             className="transition duration-300 transform hover:scale-105 hover:shadow-2xl"
         >
             {/* Image Section */}
-            <CardMedia
-                component="img"
-                image={imageSrc}
-                alt={`${username}'s Profile Picture`}
-                sx={{
-                    aspectRatio: ProfilePictureSettings.aspectRatio,
-                    height: "auto", // Updates to maintain aspect ratio and fill space nicely
-                    width: "100%",
-                    objectFit: "cover",
-                }}
-            />
+          <div className={"m-3"}>
+            <ProfilePic username={username} profilePicUrl={imageSrc} />
+          </div>
 
             <CardContent className="relative p-6">
                 {/* Username */}
